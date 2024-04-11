@@ -7,11 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-robotframework = "^7.0"
-robotframework-ride = "^2.0.8.1"
-robotframework-seleniumlibrary = "^6.2.0"
-robotframework-requests = "^0.9.6"
-jsonpath-ng = "^1.6.1"
 
 
 [build-system]

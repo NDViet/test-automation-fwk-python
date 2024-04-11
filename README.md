@@ -1,3 +1,3 @@
 # Documentations
 
-- Visit the [Wiki](wiki) page for more information.
+- Visit the [Wiki](../../wiki) page for more information.

@@ -2,7 +2,6 @@ import yaml
 from robot.api.deco import keyword
 from ndviet_test_automation.demo.utilities.files import FileUtils
 
-
 class YamlUtils:
     @keyword('convertYamlToDictionary')
     def load_yaml(self, yaml_string):

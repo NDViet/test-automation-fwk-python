@@ -1,4 +1,5 @@
 <!-- TOC -->
+* [Sessions](#sessions)
 * [Documentations](#documentations)
 * [Install Python Poetry](#install-python-poetry)
 * [Build and install common test library](#build-and-install-common-test-library)
@@ -11,6 +12,13 @@
     * [Install to in-project virtual environment](#install-to-in-project-virtual-environment)
   * [Notes](#notes)
 <!-- TOC -->
+
+# Sessions
+
+Switch branch to see contents of each session
+
+- [Session 1](../../tree/session1)
+- [Session 2](../../tree/session2)
 
 # Documentations
 

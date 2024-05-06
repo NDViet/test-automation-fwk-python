@@ -34,7 +34,8 @@ pip install poetry
 
 # Build and install common test library
 
-Common test library is separated out from the test cases repository, it is a reusable library for other test repos. It is built and installed as a Python package.
+Common test library is separated out from the test cases repository, it is a reusable library for other test repos. It
+is built and installed as a Python package.
 
 ## Clone the project to local
 
@@ -70,7 +71,8 @@ _Notes: replace the module name if yours is different_
 pip install --force-reinstall --find-links=dist ndviet_test_automation
 ```
 
-Test library module and dependencies belong to (include Robot Framework) is installed globally, it is available for any projects.
+Test library module and dependencies belong to (include Robot Framework) is installed globally, it is available for any
+projects.
 
 ### Install to in-project virtual environment
 
@@ -98,4 +100,10 @@ To deactivate the virtualenv
 
 ```Bash
 deactivate
+```
+
+Export `requirements.txt` file
+
+```Bash
+poetry export --without-hashes --format=requirements.txt --output=requirements.txt
 ```

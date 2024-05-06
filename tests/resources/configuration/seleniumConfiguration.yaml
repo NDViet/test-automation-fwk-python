@@ -1,0 +1,40 @@
+testObjectRepository:
+  directory: src/test/resources/Object_Repository
+webElementIdentifiers:
+  directory: src/test/resources/Object_Repository/Web_Identifiers
+
+selenium:
+  web_driver:
+    target: local
+  screenshot:
+    fileType: "png"
+  enableTracing: false
+  default:
+    timeOut: 15
+  hub:
+    url: "http://testops.ndviet.org/selenium"
+  browser:
+    type: chrome
+    chrome:
+      prefs:
+        se:recordVideo: true
+        se:screenResolution: "1920x1080"
+      args:
+        - "start-maximized"
+        - "--incognito"
+        - "high-dpi-support=0.8"
+        - "force-device-scale-factor=0.8"
+        - "--disable-extensions"
+        - "--disable-popup-blocking"
+        - "enable-automation"
+        - "--verbose"
+        #- "--proxy-server=10.10.10.10:8080"
+    edge:
+      prefs:
+      args:
+    firefox:
+      args:
+        - "--ignore-certificate-errors"
+        - "--start-maximized"
+        - "--enable-logging"
+        - "-private"

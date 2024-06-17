@@ -10,13 +10,15 @@ from robot.api.deco import keyword
 class WebUI:
     @staticmethod
     @keyword
-    def openBrowser(url=None, browser=None):
+    def openBrowser(url=None, browser=None, implicit_wait_time=30):
         if not browser:
             DriverManager.set_driver(TargetFactory.create_instance())
         else:
             DriverManager.set_driver(TargetFactory.create_instance(browser))
         if url:
             WebUI.navigateToUrl(url)
+        if implicit_wait_time and implicit_wait_time > 0:
+            DriverManager.get_driver().implicitly_wait(implicit_wait_time)
         return DriverManager.get_driver()
 
     @staticmethod
@@ -29,13 +31,13 @@ class WebUI:
         DriverManager.quit()
 
     @staticmethod
-    def findWebElement(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def findWebElement(test_object):
+        driver = DriverManager.get_driver()
         return WebElementHelpers.find_web_element(driver, test_object)
 
     @staticmethod
-    def findWebElements(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def findWebElements(test_object):
+        driver = DriverManager.get_driver()
         return WebElementHelpers.find_web_elements(driver, test_object)
 
     @staticmethod
@@ -44,61 +46,71 @@ class WebUI:
         WebUIAbstract.click(driver, ObjectRepository.find_test_object(object_id, variables), timeout)
 
     @staticmethod
-    def setText(driver_manager, test_object, text):
-        driver = driver_manager.get_driver()
-        WebUIAbstract.setText(driver, test_object, text)
+    def setText(object_id, text, timeout=-1, variables=None):
+        driver = DriverManager.get_driver()
+        WebUIAbstract.set_text(driver, ObjectRepository.find_test_object(object_id, variables), text, timeout)
 
     @staticmethod
-    def getText(driver_manager, test_object):
-        driver = driver_manager.get_driver()
-        return WebUIAbstract.getText(driver, test_object)
+    def sendKey(object_id, key_name, timeout=-1, variables=None):
+        driver = DriverManager.get_driver()
+        WebUIAbstract.send_key(driver, ObjectRepository.find_test_object(object_id, variables), key_name)
 
     @staticmethod
-    def getTexts(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def getText(object_id, timeout=-1, variables=None):
+        driver = DriverManager.get_driver()
+        return WebUIAbstract.get_text(driver, ObjectRepository.find_test_object(object_id, variables), timeout)
+
+    @staticmethod
+    def getAttributeValue(object_id, attribute_name, timeout=-1, variables=None):
+        driver = DriverManager.get_driver()
+        return WebUIAbstract.get_attribute_value(driver, ObjectRepository.find_test_object(object_id, variables), attribute_name, timeout)
+
+    @staticmethod
+    def getTexts(test_object):
+        driver = DriverManager.get_driver()
         return WebUIAbstract.getTexts(driver, test_object)
 
     @staticmethod
-    def moveToElement(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def moveToElement(test_object):
+        driver = DriverManager.get_driver()
         WebUIAbstract.moveToElement(driver, test_object)
 
     @staticmethod
-    def scrollToElement(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def scrollToElement(test_object):
+        driver = DriverManager.get_driver()
         WebUIAbstract.scrollToElement(driver, test_object)
 
     @staticmethod
-    def uploadFile(driver_manager, test_object, absolute_path):
-        driver = driver_manager.get_driver()
+    def uploadFile(test_object, absolute_path):
+        driver = DriverManager.get_driver()
         WebUIAbstract.uploadFile(driver, test_object, absolute_path)
 
     @staticmethod
-    def verifyElementPresent(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def verifyElementPresent(test_object):
+        driver = DriverManager.get_driver()
         WebUIAbstract.verifyElementPresent(driver, test_object)
 
     @staticmethod
-    def verifyElementNotPresent(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def verifyElementNotPresent(test_object):
+        driver = DriverManager.get_driver()
         WebUIAbstract.verifyElementNotPresent(driver, test_object)
 
     @staticmethod
-    def verifyElementVisible(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def verifyElementVisible(test_object):
+        driver = DriverManager.get_driver()
         WebUIAbstract.verifyElementVisible(driver, test_object)
 
     @staticmethod
-    def verifyElementNotVisible(driver_manager, test_object):
-        driver = driver_manager.get_driver()
+    def verifyElementNotVisible(test_object):
+        driver = DriverManager.get_driver()
         WebUIAbstract.verifyElementNotVisible(driver, test_object)
 
     @staticmethod
-    def verifyElementTextEquals(driver_manager, test_object, expect_text):
-        driver = driver_manager.get_driver()
+    def verifyElementTextEquals(test_object, expect_text):
+        driver = DriverManager.get_driver()
         WebUIAbstract.verifyElementTextEquals(driver, test_object, expect_text)
 
     @staticmethod
-    def verifyElementTextContains(driver_manager, test_object, expect_text):
-        driver = driver_manager.get_driver()
+    def verifyElementTextContains(test_object, expect_text):
+        driver = DriverManager.get_driver()
         WebUIAbstract.verifyElementTextContains(driver, test_object, expect_text)

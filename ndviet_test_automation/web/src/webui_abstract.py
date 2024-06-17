@@ -6,6 +6,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
 from ndviet_test_automation.web.src.waiting import Element as WaitElement
 from ndviet_test_automation.web.src.web_element_helpers import WebElementHelpers
+from selenium.webdriver.common.keys import Keys
 
 
 class WebUIAbstract:
@@ -19,10 +20,10 @@ class WebUIAbstract:
             print(f"{test_object} could not be clicked successfully.")
             raise e
 
+    @staticmethod
     def set_text(driver, test_object, text, timeout=-1):
         try:
-            element = WebDriverWait(driver, timeout).until(
-                EC.element_to_be_clickable((test_object.get_identifier_type(), test_object.get)))
+            element = WaitElement.element_to_be_clickable(driver, test_object, True, timeout)
             driver.execute_script("arguments[0].scrollIntoView();", element)
             element.send_keys(text)
         except Exception as e:
@@ -30,11 +31,27 @@ class WebUIAbstract:
             raise e
 
     @staticmethod
-    def getText(driver, test_object):
-        text = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((test_object.get_identifier_type(), test_object.get_identifier_value()))).text
+    def send_key(driver, test_object, key_name, timeout=-1):
+        key = getattr(Keys, key_name.upper(), None)
+        if key is None:
+            raise ValueError(f"Invalid key name: {key_name}")
+        element = WaitElement.element_to_be_clickable(driver, test_object, True, timeout)
+        element.send_keys(key)
+
+    @staticmethod
+    def get_text(driver, test_object, timeout=-1):
+        text = WaitElement.element_to_be_clickable(driver, test_object, True, timeout).text
         print(f"Text in element: {text}")
         return text
+
+    @staticmethod
+    def get_attribute_value(driver, test_object, attribute_name, timeout=-1):
+        try:
+            element = WaitElement.element_to_be_clickable(driver, test_object, True, timeout)
+            return element.get_attribute(attribute_name)
+        except Exception as e:
+            print(f"Could not get attribute {attribute_name} from {test_object}.")
+            raise e
 
     @staticmethod
     def getTexts(driver, test_object):

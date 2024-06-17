@@ -3,6 +3,7 @@ import configparser
 from robot.libraries.BuiltIn import BuiltIn
 
 from ndviet_test_automation.utilities.src.configuration.abstract_configuration import AbstractConfiguration
+from ndviet_test_automation.utilities.src.dictionary.dict_utils import DictUtils
 
 
 class PropertiesConfiguration(AbstractConfiguration):
